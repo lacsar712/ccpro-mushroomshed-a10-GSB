@@ -4,6 +4,7 @@ import { getToken } from './api/client'
 import Layout from './components/Layout'
 import Login from './pages/Login'
 import Dashboard from './pages/Dashboard'
+import Utilization from './pages/Utilization'
 import Sheds from './pages/Sheds'
 import Rooms from './pages/Rooms'
 import ClimateLogs from './pages/ClimateLogs'
@@ -23,6 +24,7 @@ export default function App() {
       <Route path="/login" component={Login} />
       <Route path="/" component={AuthedLayout}>
         <Route path="/" component={Dashboard} />
+        <Route path="/utilization" component={Utilization} />
         <Route path="/sheds" component={Sheds} />
         <Route path="/rooms" component={Rooms} />
         <Route path="/climate-logs" component={ClimateLogs} />

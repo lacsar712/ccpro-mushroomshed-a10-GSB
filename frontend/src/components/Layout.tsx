@@ -4,6 +4,7 @@ import { clearToken } from '../api/client'
 
 const links = [
   { href: '/', label: '看板', end: true },
+  { href: '/utilization', label: '利用率' },
   { href: '/sheds', label: '菇房' },
   { href: '/rooms', label: '出菇室' },
   { href: '/climate-logs', label: '环境记录' },

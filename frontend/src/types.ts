@@ -43,3 +43,30 @@ export interface DashboardStats {
   climateLast24h: number
   harvestKgLast7d: number
 }
+
+export interface UtilizationRoomRow {
+  roomId: number
+  roomCode: string
+  shedId: number
+  species: string
+  status: RoomStatus
+  capacityBags: number
+  harvestKg: number
+  climateCount: number
+  utilizationHint: number
+}
+
+export interface UtilizationBoard {
+  days: number
+  roomId: number | null
+  asOf: string
+  rooms: UtilizationRoomRow[]
+}
+
+export interface UtilizationCheck {
+  days: number
+  roomId: number | null
+  asOf: string
+  rows: UtilizationRoomRow[]
+  perRoom: Record<string, { harvestKg: number; utilizationHint: number }>
+}
