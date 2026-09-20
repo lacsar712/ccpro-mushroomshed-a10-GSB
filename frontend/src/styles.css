@@ -102,6 +102,64 @@ a {
   cursor: pointer;
 }
 
+.sidebar-days {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sidebar-days-label {
+  font-size: 12px;
+  color: rgba(238, 245, 234, 0.72);
+}
+
+.sidebar-days-opts {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.day-btn {
+  flex: 1 1 auto;
+  border: 1px solid rgba(255, 255, 255, 0.22);
+  background: transparent;
+  color: #eef5ea;
+  border-radius: 8px;
+  padding: 6px 8px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.day-btn.active {
+  background: rgba(255, 255, 255, 0.18);
+  border-color: rgba(255, 255, 255, 0.5);
+  color: #fff;
+}
+
+.reconcile-banner {
+  margin: 14px 0 4px;
+  border-radius: 10px;
+  padding: 10px 12px;
+  font-size: 13px;
+  border: 1px solid;
+}
+
+.reconcile-banner.ok {
+  background: #e7f4ea;
+  border-color: #bfe0c8;
+  color: #23603a;
+}
+
+.reconcile-banner.bad {
+  background: #fdeceb;
+  border-color: #f3c4bf;
+  color: var(--danger);
+}
+
+.util-summary {
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+}
+
 .main {
   padding: 28px 32px 48px;
 }

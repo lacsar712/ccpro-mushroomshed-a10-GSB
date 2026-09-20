@@ -1,6 +1,7 @@
 import { createSignal, onMount } from 'solid-js'
 import { For } from 'solid-js'
 import { api } from '../api/client'
+import { notifyUtilizationDataChanged } from '../api/utilizationStore'
 import type { ClimateLog, Room } from '../types'
 
 function toLocalInput(iso?: string) {
@@ -54,6 +55,8 @@ export default function ClimateLogs() {
       })
       setForm({ ...empty, recordedAt: toLocalInput() })
       await load()
+      // 新建环境记录成功后立刻反映到利用率看板（重新拉取并对账）
+      notifyUtilizationDataChanged()
     } catch (err) {
       setError(err instanceof Error ? err.message : '保存失败')
     }
@@ -64,6 +67,7 @@ export default function ClimateLogs() {
     try {
       await api(`/api/climate-logs/${id}`, { method: 'DELETE' })
       await load()
+      notifyUtilizationDataChanged()
     } catch (err) {
       setError(err instanceof Error ? err.message : '删除失败')
     }

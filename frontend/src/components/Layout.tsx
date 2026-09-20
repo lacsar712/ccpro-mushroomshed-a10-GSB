@@ -1,9 +1,15 @@
 import { A, useNavigate } from '@solidjs/router'
 import { For, type ParentProps } from 'solid-js'
 import { clearToken } from '../api/client'
+import {
+  DAY_OPTIONS,
+  setUtilizationDays,
+  utilizationDays,
+} from '../api/utilizationStore'
 
 const links = [
   { href: '/', label: '看板', end: true },
+  { href: '/utilization', label: '出菇室利用率' },
   { href: '/sheds', label: '菇房' },
   { href: '/rooms', label: '出菇室' },
   { href: '/climate-logs', label: '环境记录' },
@@ -32,6 +38,22 @@ export default function Layout(props: ParentProps) {
             )}
           </For>
         </nav>
+        <div class="sidebar-days">
+          <div class="sidebar-days-label">利用率统计天数</div>
+          <div class="sidebar-days-opts">
+            <For each={[...DAY_OPTIONS]}>
+              {(d) => (
+                <button
+                  type="button"
+                  class={`day-btn${utilizationDays() === d ? ' active' : ''}`}
+                  onClick={() => setUtilizationDays(d)}
+                >
+                  {d}天
+                </button>
+              )}
+            </For>
+          </div>
+        </div>
         <button
           type="button"
           class="logout-btn"

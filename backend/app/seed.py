@@ -111,6 +111,40 @@ def seed() -> None:
                         co2_ppm=690.0,
                         notes=None,
                     ),
+                    # idle 室：窗口内有环境记录与采收，但 utilizationHint 强制为 0
+                    ClimateLog(
+                        room_id=r2.id,
+                        recorded_at=now - timedelta(hours=10),
+                        temp_c=19.1,
+                        humidity_pct=82,
+                        co2_ppm=None,
+                        notes="清空前最后一次巡检",
+                    ),
+                    FlushHarvest(
+                        room_id=r2.id,
+                        harvested_at=now - timedelta(days=2),
+                        flush_no=1,
+                        weight_kg=20.0,
+                        grade="C",
+                        operator_name="出菇员",
+                    ),
+                    # sanitize 室：窗口内有采收，hint 按 harvest 公式再乘 0.5
+                    ClimateLog(
+                        room_id=r4.id,
+                        recorded_at=now - timedelta(hours=20),
+                        temp_c=22.4,
+                        humidity_pct=70,
+                        co2_ppm=610.0,
+                        notes="蒸汽消杀中",
+                    ),
+                    FlushHarvest(
+                        room_id=r4.id,
+                        harvested_at=now - timedelta(days=4),
+                        flush_no=1,
+                        weight_kg=10.0,
+                        grade="B",
+                        operator_name="场长",
+                    ),
                     FlushHarvest(
                         room_id=r1.id,
                         harvested_at=now - timedelta(hours=6),

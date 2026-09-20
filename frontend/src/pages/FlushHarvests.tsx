@@ -1,6 +1,7 @@
 import { createSignal, onMount } from 'solid-js'
 import { For } from 'solid-js'
 import { api } from '../api/client'
+import { notifyUtilizationDataChanged } from '../api/utilizationStore'
 import type { FlushHarvest, HarvestGrade, Room } from '../types'
 
 const grades: HarvestGrade[] = ['A', 'B', 'C']
@@ -56,6 +57,8 @@ export default function FlushHarvests() {
       })
       setForm({ ...empty, harvestedAt: toLocalInput() })
       await load()
+      // 新建采收成功后立刻反映到利用率看板（重新拉取并对账）
+      notifyUtilizationDataChanged()
     } catch (err) {
       setError(err instanceof Error ? err.message : '保存失败')
     }
@@ -66,6 +69,7 @@ export default function FlushHarvests() {
     try {
       await api(`/api/flush-harvests/${id}`, { method: 'DELETE' })
       await load()
+      notifyUtilizationDataChanged()
     } catch (err) {
       setError(err instanceof Error ? err.message : '删除失败')
     }
